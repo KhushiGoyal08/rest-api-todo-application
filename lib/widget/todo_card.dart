@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:to_doapp/services/todo_services.dart';
 
+import '../model/todo_model.dart';
+
 class ToDoCard extends StatelessWidget {
   final  int index;
-  final Map item;
-  final Function(Map) navigateEdit;
+  final ToDo item;
+  // final Function(Map) navigateEdit;
   final Function(String) deleteById;
       ToDoCard(
       {
         super.key,
         required this.index,
         required this.item,
-        required this.navigateEdit,
+        // required this.navigateEdit,
         required this.deleteById
       });
 
@@ -20,19 +22,18 @@ class ToDoCard extends StatelessWidget {
     return  Card(
       child: ListTile(
         leading: Text('${index +1}'),
-
-        title: Text(item['description']),
-        subtitle: Text(item['title']),
+        title: Text(item.title),
+        subtitle: Text(item.description),
 
         trailing: PopupMenuButton(
           onSelected: (value){
             if(value=='edit'){
               //open edit page
-          navigateEdit(item);
+          // navigateEdit;
             }
             else if(value=='delete'){
               //delete and remove the item
-              deleteById(item['_id'] as String);
+              deleteById(item.id as String);
             }
           },
           itemBuilder: (context){

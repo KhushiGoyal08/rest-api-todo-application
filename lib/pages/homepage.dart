@@ -3,9 +3,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:to_doapp/pages/add.dart';
 import 'package:http/http.dart' as http;
+import 'package:to_doapp/pages/post_api.dart';
+import 'package:to_doapp/pages/postpage.dart';
+import 'package:to_doapp/pages/product1.dart';
 import 'package:to_doapp/services/todo_services.dart';
 import 'package:to_doapp/widget/todo_card.dart';
 
+import '../model/todo_model.dart';
 import '../utils/snackbar_helper.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,11 +19,15 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 bool isLoading=true;
-List items=[];
+// List items=[];
+List<ToDo> _todos=[];
+final ToDoServices _toDoServices =ToDoServices();
 class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
-    fetchToDo();
+    // fetchToDo();
+    // _toDoServices.fetchToDos();
+    _loadTodos();
   }
 
   Future<void> deleteById(String id) async{
@@ -27,10 +35,11 @@ class _HomePageState extends State<HomePage> {
   final isSuccess = await ToDoServices.deleteById(id);
     // remove the item from the list
     if(isSuccess){
-      final filtered =items.where((element)=> element['_id']!=id).toList();
-      setState(() {
-        items=filtered;
-      });
+      // final filtered =_todos;
+      // setState(() {
+      //   // _todos=filtered;
+      // });
+      _loadTodos();
     }
   else{
     // deletion failed
@@ -38,16 +47,27 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Future<void> fetchToDo() async {
-   final response = await  ToDoServices.fetchToDos();
+  // Future<void> fetchToDo() async {
+  //  final response = await  ToDoServices.fetchToDos();
+  //
+  //   if (response != null) {
+  //
+  //     setState(() {
+  //       items = response as List;
+  //     });
+  //   }
+  //
+  // }
+  Future<void> _loadTodos() async {
+    try {
 
-    if (response != null) {
-
+      final todos = await _toDoServices.fetchToDos();
       setState(() {
-        items = response as List;
+        _todos = todos;
       });
+    } catch (e) {
+      print('Error loading todos: $e');
     }
-
   }
 
 
@@ -56,6 +76,26 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("ToDo List "),
+        actions: [
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: ElevatedButton(onPressed: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const PostApi()));
+          }, child: Text("Post")),
+        )  ,
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: ElevatedButton(onPressed: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const Post()));
+            }, child: Text("Get")),
+          )  ,
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: ElevatedButton(onPressed: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const Product1()));
+            }, child: Text("Get")),
+          )  ,
+        ],
       ),
 
       body: Visibility(
@@ -63,19 +103,19 @@ class _HomePageState extends State<HomePage> {
           child: Center(child: CircularProgressIndicator()),
         replacement:
          RefreshIndicator(
-          onRefresh: fetchToDo,
+          onRefresh: _loadTodos,
           child: Visibility(
-            visible: items.isNotEmpty,
+            visible: _todos.isNotEmpty,
             replacement: Center(child: Text('No ToDo Item',
             style: Theme.of(context).textTheme.headlineMedium,),
             ),
             child: ListView.builder(
               padding: EdgeInsets.all(8),
-                itemCount:items.length,
+                itemCount:_todos.length,
                 itemBuilder: (context,index){
-                  final item =items[index] as Map;
-                  final id =item['_id'] as String;
-                  return ToDoCard(index: index, item: item, navigateEdit: navigateToEditPage,deleteById: deleteById,);
+                  ToDo item =_todos[index] ;
+
+                  return ToDoCard(index: index, item: item /*navigateEdit: navigateToEditPage*/,deleteById: deleteById,);
             }),
           ),
 
@@ -95,18 +135,16 @@ Future<void> navigateToAddPage(BuildContext context) async{
    setState(() {
      isLoading =false;
    });
-   fetchToDo();
+   _loadTodos();
   }
 
   void navigateToEditPage(Map item){
     final route= MaterialPageRoute(
-      builder: (ctx)=> AddToDoPage(todo: item),
+      builder: (ctx)=> AddToDoPage(),
     );
     Navigator.push(context, route);
-    fetchToDo();
+    _loadTodos();
   }
-
-
 
 
 }

@@ -1,23 +1,22 @@
-class ToDo{
-  int id;
+class ToDo {
+  String id;
   String title;
   String description;
 
-  ToDo({
-    required this.id,
-    required this.title,
-    required this.description
-});
+  ToDo({ this.id="", required this.title, required this.description});
 
-  factory ToDo.fromJson(Map<String,dynamic> json){
-    return ToDo(id: json['_id'], title: json['title'], description: json['description']);
+  factory ToDo.fromJson(Map<String, dynamic> json) {
+    return ToDo(
+        id: json['_id'],
+        title: json['title'],
+        description: json['description']);
   }
 
-  Map<String,dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return {
-      '_id':id,
-      'title':title,
-      'description':description,
+      '_id': id,
+      'title': title,
+      'description': description,
     };
   }
 }
