@@ -9,17 +9,16 @@ class PostApi extends StatefulWidget {
   State<PostApi> createState() => _PostApiState();
 }
 
-
 class _PostApiState extends State<PostApi> {
-
   // final TextEditingController titleController =TextEditingController();
   // final TextEditingController bodyController =TextEditingController();
-  final PostApiServices postApiServices=PostApiServices();
-  PostApiModel postApiModel=PostApiModel();
-  Future<void>  _loadData() async{
-    PostApiModel postBody=postApiModel;
+  final PostApiServices postApiServices = PostApiServices();
+  PostApiModel postApiModel = PostApiModel();
+  Future<void> _loadData() async {
+    PostApiModel postBody = postApiModel;
     await postApiServices.postData(postBody);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,23 +28,26 @@ class _PostApiState extends State<PostApi> {
           child: Column(
             children: [
               TextField(
-               onChanged: (value){
-                 postApiModel.title=value;
-               },
+                onChanged: (value) {
+                  postApiModel.title = value;
+                },
                 decoration: const InputDecoration(hintText: "Title"),
-
               ),
-              const SizedBox(height: 16,),
+              const SizedBox(
+                height: 16,
+              ),
               TextField(
-                onChanged: (value){
-                  postApiModel.body=value;
+                onChanged: (value) {
+                  postApiModel.body = value;
                 },
                 decoration: const InputDecoration(hintText: "Body"),
                 keyboardType: TextInputType.multiline,
                 minLines: 5,
                 maxLines: 8,
               ),
-              const SizedBox(height: 16,),
+              const SizedBox(
+                height: 16,
+              ),
               ElevatedButton(onPressed: _loadData, child: Text("Submit"))
             ],
           ),

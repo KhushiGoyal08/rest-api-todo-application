@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:to_doapp/onco/pages/first_screen.dart';
+import 'package:to_doapp/pages/getapidiopage.dart';
 import 'package:to_doapp/pages/homepage.dart';
 
 void main() {
@@ -11,10 +13,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(
+      theme: ThemeData.light(
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const FirstScreen(),
     );
   }
 }
