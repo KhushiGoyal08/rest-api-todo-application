@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:to_doapp/onco/pages/activationScreen.dart';
+import 'package:to_doapp/onco/pages/postureScreen.dart';
 import 'package:to_doapp/onco/widgets/round_button.dart';
 
 class FaceVitalScreen extends StatelessWidget {
@@ -42,33 +44,9 @@ class FaceVitalScreen extends StatelessWidget {
             ),
 
             // profile Pic
-
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image(
-                fit: BoxFit.cover,
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.4,
-                image: const AssetImage(
-                    "assets/images/onco.png"),
-              ),
-            ),
-            Text(
-              'FACE VITAL INSTRUCTION:',
-              style: GoogleFonts.openSans(
-                color: const Color(0xFF2A2A2A),
-                fontSize: MediaQuery.of(context).textScaleFactor*12,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            Text(
-              '1.Find a well-lit area for accurate results.\n2.Hold your device at eye level for optimal scanning.\n3.Remove accessories like glasses or hats for clarity.\n4.Ensure your face is visible and centred in the frame.\n5.Stay still during the scanning process for accuracy.',
-              style: GoogleFonts.openSans(
-                color: const Color(0xFF2A2A2A),
-                fontSize: MediaQuery.of(context).textScaleFactor*12,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+           // const    First(),
+             PostureScreen(),
+           //       const  ActivationScreen(),
               Button(
                 widget:const  Icon(Icons.arrow_forward,color: Colors.white,),
                   onPress: () {},
@@ -164,6 +142,45 @@ class StepIndicator extends StatelessWidget {
             .toList()
           ..removeLast(), // Remove the last divider
       ),
+    );
+  }
+}
+
+
+class First extends StatelessWidget {
+  const First({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Image(
+            fit: BoxFit.cover,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.4,
+            image: const AssetImage(
+                "assets/images/onco.png"),
+          ),
+        ),
+        Text(
+          'FACE VITAL INSTRUCTION:',
+          style: GoogleFonts.openSans(
+            color: const Color(0xFF2A2A2A),
+            fontSize: MediaQuery.of(context).textScaleFactor*12,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        Text(
+          '1.Find a well-lit area for accurate results.\n2.Hold your device at eye level for optimal scanning.\n3.Remove accessories like glasses or hats for clarity.\n4.Ensure your face is visible and centred in the frame.\n5.Stay still during the scanning process for accuracy.',
+          style: GoogleFonts.openSans(
+            color: const Color(0xFF2A2A2A),
+            fontSize: MediaQuery.of(context).textScaleFactor*12,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ],
     );
   }
 }
