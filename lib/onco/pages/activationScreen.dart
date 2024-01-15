@@ -1,5 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:to_doapp/onco/pages/faceVitalScreen.dart';
+import 'package:to_doapp/onco/pages/homeoncoscreen.dart';
+
+
+
+class VitalScreen3 extends StatelessWidget {
+  const VitalScreen3({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FaceVitalScreen(widget: [
+      StepIndicator(
+        numberOfSteps: 3, // Set the number of steps
+        currentStep: 3, // Set the current step
+      ),
+
+      const    ActivationScreen(),
+        const   Spacer(),
+      Center(child: SvgPicture.asset("assets/images/camera.svg")),
+
+      Center(
+        child: Text(
+          'Start scanning',
+          style: GoogleFonts.openSans(
+            fontWeight: FontWeight.w700,
+            color: const Color(0xFF1E1E1E),
+            fontSize: 16,
+
+          ),
+        ),
+      )
+
+    ]);
+  }
+}
+
 class ActivationScreen extends StatelessWidget {
   const ActivationScreen({super.key});
 
@@ -9,6 +46,7 @@ class ActivationScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
+        const   SizedBox(height: 20,),
         Text(
           'ACTIVATE CAMERA FOR SCANNING:',
           style: TextStyle(
@@ -18,6 +56,7 @@ class ActivationScreen extends StatelessWidget {
 
           ),
         ),
+      const   SizedBox(height: 20,),
         Text(
           'Step1: Tap the camera icon below to start scanning.\nStep2: Grant camera permissions if prompted.\nStep3: Position your face within the frame.\nStep4: Hold steady until the scan is complete.',
           style: GoogleFonts.openSans(

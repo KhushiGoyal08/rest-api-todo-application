@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:to_doapp/challenge/screens/pages/challenge_name.dart';
 import 'package:to_doapp/onco/pages/faceVitalScreen.dart';
-// import 'package:to_doapp/onco/pages/first_screen.dart';
-// import 'package:to_doapp/pages/getapidiopage.dart';
-// import 'package:to_doapp/pages/homepage.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light(
         useMaterial3: true,
       ),
-      home: const FaceVitalScreen(),
+      home:  const VitalScreen(),
     );
   }
 }

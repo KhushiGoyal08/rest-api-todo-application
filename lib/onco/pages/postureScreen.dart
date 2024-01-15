@@ -1,6 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:to_doapp/onco/pages/activationScreen.dart';
+import 'package:to_doapp/onco/pages/faceVitalScreen.dart';
+import 'package:to_doapp/onco/pages/homeoncoscreen.dart';
+import 'package:to_doapp/onco/widgets/round_button.dart';
+
+
+class VitalScreen2 extends StatelessWidget {
+  const VitalScreen2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FaceVitalScreen(widget: [
+      StepIndicator(
+        numberOfSteps: 3, // Set the number of steps
+        currentStep: 2, // Set the current step
+      ),
+
+      PostureScreen(),
+
+      Button(
+          widget:const  Icon(Icons.arrow_forward,color: Colors.white,),
+          onPress: () {
+            Navigator.push(context,MaterialPageRoute(builder: (context)=>const VitalScreen3()));
+          },
+          text: "Next ",
+          textColor: Colors.white,
+          buttonColor: const Color(0xFFDC7D57)),
+    ]);
+  }
+}
+
 
 class PostureScreen extends StatelessWidget {
   PostureScreen({super.key});

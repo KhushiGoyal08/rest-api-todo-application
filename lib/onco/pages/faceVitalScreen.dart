@@ -1,62 +1,77 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:to_doapp/onco/pages/activationScreen.dart';
+import 'package:to_doapp/onco/pages/homeoncoscreen.dart';
 import 'package:to_doapp/onco/pages/postureScreen.dart';
 import 'package:to_doapp/onco/widgets/round_button.dart';
 
-class FaceVitalScreen extends StatelessWidget {
-  const FaceVitalScreen({super.key});
+class VitalScreen extends StatelessWidget {
+  const VitalScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          leading:const  Icon(Icons.arrow_back_ios),
-          title:  Text("Face Vital",
-            style: GoogleFonts.openSans(
-              color:const  Color(0xFF2A2A2A),
-              fontSize: MediaQuery.of(context).textScaleFactor*16,
+    return FaceVitalScreen(widget: [
+      StepIndicator(
+numberOfSteps: 3, // Set the number of steps
+currentStep: 1, // Set the current step
+),
 
-              fontWeight: FontWeight.w700,
+      const    First(),
 
-            ),),
-          centerTitle: true,
-          actions: const [
-            Padding(
-              padding: EdgeInsets.only(right: 16.0),
-              child: CircleAvatar(
-                backgroundImage: AssetImage(
-                    "assets/images/Avatar.png"),
-              ),
-            ),
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-            StepIndicator(
-              numberOfSteps: 3, // Set the number of steps
-              currentStep: 1, // Set the current step
-            ),
+      Button(
+widget:const  Icon(Icons.arrow_forward,color: Colors.white,),
+onPress: () {
+Navigator.push(context,MaterialPageRoute(builder: (context)=>const VitalScreen2()));
+},
+text: "Next ",
+textColor: Colors.white,
+buttonColor: const Color(0xFFDC7D57)),
+    ]);
+  }
+}
 
-            // profile Pic
-           // const    First(),
-             PostureScreen(),
-           //       const  ActivationScreen(),
-              Button(
-                widget:const  Icon(Icons.arrow_forward,color: Colors.white,),
-                  onPress: () {},
-                  text: "Next ",
-                  textColor: Colors.white,
-                  buttonColor: const Color(0xFFDC7D57))
-            ],
+class First extends StatelessWidget {
+  const First({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Image(
+            fit: BoxFit.cover,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.4,
+            image: const AssetImage(
+                "assets/images/onco.png"),
           ),
         ),
-      ),
+        const  SizedBox(
+          height: 10,
+        ),
+        Text(
+          'FACE VITAL INSTRUCTION:',
+          style: GoogleFonts.openSans(
+            color: const Color(0xFF2A2A2A),
+            fontSize: MediaQuery.of(context).textScaleFactor*12,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        const  SizedBox(
+          height: 10,
+        ),
+        Text(
+          '1.Find a well-lit area for accurate results.\n2.Hold your device at eye level for optimal scanning.\n3.Remove accessories like glasses or hats for clarity.\n4.Ensure your face is visible and centred in the frame.\n5.Stay still during the scanning process for accuracy.',
+          style: GoogleFonts.openSans(
+            color: const Color(0xFF2A2A2A),
+            fontSize: MediaQuery.of(context).textScaleFactor*12,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ],
     );
   }
 }
@@ -93,7 +108,7 @@ class StepIndicator extends StatelessWidget {
                             ? const Color(0xFFDC7D57)
                             : const Color(0x26213D68)),
                   ),
-                  child: Center(
+                  child:index+1<currentStep?const Icon(Icons.check): Center(
                     child: Text(
                       '${index + 1}',
                       textAlign: TextAlign.center,
@@ -113,8 +128,8 @@ class StepIndicator extends StatelessWidget {
                 Text(
                   text[index],
                   style: GoogleFonts.openSans(
-                    color: isCompleted
-                        ? const Color(0xFF1F2024)
+                    color: isCompleted &&index+1<currentStep
+                        ? const Color(0xFFDC7D57)
                         : const Color(0x99213D68),
                     fontSize: 10,
                     fontWeight: FontWeight.w700,
@@ -147,40 +162,4 @@ class StepIndicator extends StatelessWidget {
 }
 
 
-class First extends StatelessWidget {
-  const First({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Image(
-            fit: BoxFit.cover,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.4,
-            image: const AssetImage(
-                "assets/images/onco.png"),
-          ),
-        ),
-        Text(
-          'FACE VITAL INSTRUCTION:',
-          style: GoogleFonts.openSans(
-            color: const Color(0xFF2A2A2A),
-            fontSize: MediaQuery.of(context).textScaleFactor*12,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        Text(
-          '1.Find a well-lit area for accurate results.\n2.Hold your device at eye level for optimal scanning.\n3.Remove accessories like glasses or hats for clarity.\n4.Ensure your face is visible and centred in the frame.\n5.Stay still during the scanning process for accuracy.',
-          style: GoogleFonts.openSans(
-            color: const Color(0xFF2A2A2A),
-            fontSize: MediaQuery.of(context).textScaleFactor*12,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      ],
-    );
-  }
-}
