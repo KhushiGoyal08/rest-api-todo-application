@@ -17,8 +17,8 @@ class VitalScreen2 extends StatelessWidget {
         numberOfSteps: 3, // Set the number of steps
         currentStep: 2, // Set the current step
       ),
-
-      PostureScreen(),
+  const SizedBox(height: 30,),
+      Expanded (child: PostureScreen()),
 
       Button(
           widget:const  Icon(Icons.arrow_forward,color: Colors.white,),
@@ -116,30 +116,13 @@ class PostureScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment:
-                      CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Choose the posture that best suits you for accurate scanning.',
-                          style: GoogleFonts.openSans(
-                            color: const Color(0x99213D68),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              Text(
+                'Choose the posture that best suits you for accurate scanning.',
+                style: GoogleFonts.openSans(
+                  color: const Color(0x99213D68),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ],
           ),

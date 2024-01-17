@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:to_doapp/onco/pages/activationScreen.dart';
@@ -15,8 +16,10 @@ class VitalScreen extends StatelessWidget {
 numberOfSteps: 3, // Set the number of steps
 currentStep: 1, // Set the current step
 ),
-
-      const    First(),
+      const  SizedBox(
+        height: 25,
+      ),
+     const  Expanded(child:     First()),
 
       Button(
 widget:const  Icon(Icons.arrow_forward,color: Colors.white,),
@@ -35,9 +38,8 @@ class First extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
+      shrinkWrap: true,
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(20),

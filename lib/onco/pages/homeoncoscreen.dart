@@ -10,7 +10,11 @@ List<Widget> widget;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          leading:const  Icon(Icons.arrow_back_ios),
+          leading:  IconButton(
+            onPressed: (){
+              Navigator.of(context).pop();
+            },
+              icon:const Icon(Icons.arrow_back_ios)),
           title:  Text("Face Vital",
             style: GoogleFonts.openSans(
               color:const  Color(0xFF2A2A2A),

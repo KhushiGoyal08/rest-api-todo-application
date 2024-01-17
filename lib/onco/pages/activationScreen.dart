@@ -16,9 +16,11 @@ class VitalScreen3 extends StatelessWidget {
         numberOfSteps: 3, // Set the number of steps
         currentStep: 3, // Set the current step
       ),
+      const  SizedBox(
+        height: 19,
+      ),
+     const  Expanded(child:    ActivationScreen()),
 
-      const    ActivationScreen(),
-        const   Spacer(),
       Center(child: SvgPicture.asset("assets/images/camera.svg")),
 
       Center(
